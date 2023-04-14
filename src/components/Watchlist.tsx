@@ -1,0 +1,37 @@
+import React from 'react';
+
+export type PropsType = {
+    movies: MovieType[]
+    title: string
+    removeFilms: (id: string) => void
+}
+
+export type MovieType = {
+    id: string
+    name: string
+    watched: boolean
+    rating: number
+}
+
+
+export const Watchlist = (props: PropsType) => {
+    return (
+        <>
+            <h3> {props.title} </h3>
+            <ul>
+                {props.movies.map((el) => {
+                    return (
+                        <li key={el.id}>
+                            <button onClick={() => {
+                                props.removeFilms(el.id)
+                            }}>x
+                            </button>
+                            <input type={'checkbox'} checked={el.watched}/>
+                            {`${el.name}: ${el.rating}`}
+                        </li>
+                    )
+                })}
+            </ul>
+        </>
+    );
+};
